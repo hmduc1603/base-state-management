@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-
 export 'sources/base_cubit.dart';
 export 'sources/base_event.dart';
 export 'sources/base_simple_state.dart';
 export 'sources/base_state.dart';
 
-class MLStateManagement {
-  static final MLStateManagement _singleton = MLStateManagement._internal();
+class StateManagement {
+  static final StateManagement _singleton = StateManagement._internal();
 
-  MLStateManagement._internal();
+  StateManagement._internal();
 
-  factory MLStateManagement() {
+  factory StateManagement() {
     return _singleton;
   }
 
