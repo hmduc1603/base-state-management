@@ -1,10 +1,9 @@
+import 'package:base_state_management/statemanagement.dart';
 import 'package:flutter/material.dart';
-import 'package:mlstatemanagement/mlstatemanagement.dart';
 
 class AppLoadingController {
   final params = ValueNotifier<AppLoadingControllerParams>(
-    AppLoadingControllerParams(
-        visible: false, hasBlurBackground: true, message: null),
+    AppLoadingControllerParams(visible: false, hasBlurBackground: true, message: null),
   );
 
   showLoading({bool blurBG = true, String? msg}) {
@@ -45,8 +44,7 @@ class AppLoadingControllerParams {
 }
 
 class AppLoadingHUD extends StatelessWidget {
-  const AppLoadingHUD({Key? key, required this.child, required this.controller})
-      : super(key: key);
+  const AppLoadingHUD({Key? key, required this.child, required this.controller}) : super(key: key);
 
   final Widget child;
   final AppLoadingController controller;
@@ -61,8 +59,7 @@ class AppLoadingHUD extends StatelessWidget {
             builder: (context, visible, child) {
               return Visibility(
                 visible: controller.params.value.visible,
-                child: MLStateManagement()
-                    .appLoadingBuilder(controller.params.value.message ?? ''),
+                child: StateManagement().appLoadingBuilder(controller.params.value.message ?? ''),
               );
             })
       ],

@@ -1,8 +1,7 @@
-import 'package:mlstatemanagement/mlstatemanagement.dart';
+import 'package:base_state_management/statemanagement.dart';
 
 class AppState extends BaseCubitState {
-  const AppState({PageStatus? pageStatus})
-      : super(pageStatus: pageStatus ?? const PageStatus());
+  const AppState({PageStatus? pageStatus}) : super(pageStatus: pageStatus ?? const PageStatus());
 
   @override
   List<Object?> get extraProps => [];

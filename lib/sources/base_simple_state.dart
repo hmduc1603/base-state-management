@@ -1,7 +1,6 @@
+import 'package:base_state_management/sources/base_app_loading.dart';
+import 'package:base_state_management/statemanagement.dart';
 import 'package:flutter/material.dart';
-import 'package:mlstatemanagement/mlstatemanagement.dart';
-import 'package:mlstatemanagement/sources/base_app_loading.dart';
-
 import 'base_message.dart';
 
 abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> {
@@ -14,8 +13,7 @@ abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> {
 
   @override
   Widget build(BuildContext context) {
-    return AppLoadingHUD(
-        child: buildPage(context), controller: appLoadingController);
+    return AppLoadingHUD(child: buildPage(context), controller: appLoadingController);
   }
 
   Widget buildPage(BuildContext context);
@@ -24,7 +22,7 @@ abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> {
     return showDialog(
       context: context,
       builder: (context) {
-        return MLStateManagement().appDialogBuilder(message);
+        return StateManagement().appDialogBuilder(message);
       },
     );
   }
@@ -40,7 +38,7 @@ abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> {
     showDialog(
       context: context,
       builder: (context) {
-        return MLStateManagement().appOptionalDialogBuilder(
+        return StateManagement().appOptionalDialogBuilder(
           title,
           message,
           buttonTitle,
@@ -56,7 +54,7 @@ abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> {
     showDialog(
       context: context,
       builder: (context) {
-        return MLStateManagement().appDialogBuilder(_getErrorMessage(error));
+        return StateManagement().appDialogBuilder(_getErrorMessage(error));
       },
     );
   }

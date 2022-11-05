@@ -29,7 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  mlstatemanagement:
+  base_state_management:
     path: ../
   get_it: ^7.2.0
   injectable: ^1.5.0

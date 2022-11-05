@@ -1,14 +1,13 @@
 import 'dart:async';
+import 'package:base_state_management/sources/base_message.dart';
+import 'package:base_state_management/statemanagement.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mlstatemanagement/mlstatemanagement.dart';
-import 'package:mlstatemanagement/sources/base_message.dart';
 import 'base_app_loading.dart';
 
-abstract class BaseState<S extends BaseCubitState, C extends BaseCubit<S>,
-        W extends StatefulWidget> extends State<W>
+abstract class BaseState<S extends BaseCubitState, C extends BaseCubit<S>, W extends StatefulWidget> extends State<W>
     with AutomaticKeepAliveClientMixin {
   final C cubit = GetIt.instance<C>();
   final loadingController = AppLoadingController();
@@ -52,9 +51,7 @@ abstract class BaseState<S extends BaseCubitState, C extends BaseCubit<S>,
           return shouldRebuild(previous, current);
         },
         listener: (context, state) => setState(() => _state = state),
-        child: AppLoadingHUD(
-            controller: loadingController,
-            child: buildByState(context, _state)),
+        child: AppLoadingHUD(controller: loadingController, child: buildByState(context, _state)),
       ),
     );
   }
@@ -70,8 +67,7 @@ abstract class BaseState<S extends BaseCubitState, C extends BaseCubit<S>,
   onNewEvent(BaseEvent event) {
     if (event is LoadingEvent) {
       event.isLoading
-          ? loadingController.showLoading(
-              blurBG: event.hasBlurBackground, msg: getMessage(event.message))
+          ? loadingController.showLoading(blurBG: event.hasBlurBackground, msg: getMessage(event.message))
           : loadingController.hideLoading();
     }
     if (event is MessageEvent) {
@@ -104,7 +100,7 @@ abstract class BaseState<S extends BaseCubitState, C extends BaseCubit<S>,
     return showDialog(
       context: context,
       builder: (context) {
-        return MLStateManagement().appDialogBuilder(message);
+        return StateManagement().appDialogBuilder(message);
       },
     );
   }
@@ -120,7 +116,7 @@ abstract class BaseState<S extends BaseCubitState, C extends BaseCubit<S>,
     showDialog(
       context: context,
       builder: (context) {
-        return MLStateManagement().appOptionalDialogBuilder(
+        return StateManagement().appOptionalDialogBuilder(
           title,
           message,
           buttonTitle,
@@ -136,7 +132,7 @@ abstract class BaseState<S extends BaseCubitState, C extends BaseCubit<S>,
     showDialog(
       context: context,
       builder: (context) {
-        return MLStateManagement().appDialogBuilder(message);
+        return StateManagement().appDialogBuilder(message);
       },
     );
   }

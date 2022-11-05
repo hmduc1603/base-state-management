@@ -4,24 +4,24 @@
 
 ## Introduction
 
-#### What is MLStateManagement?
+#### What is StateManagement?
 It’s a hand-on package for state management using BLOC (& CUBIT) pattern & [Flutter_Bloc](https://pub.dev/packages/flutter_bloc) package. It help user implement new app faster with strong management on how widget rebuilding overtime, also this package include many common widgets & functions (ex: showLoading, showError, ...).
 
-#### Why MLStateManagement?
+#### Why StateManagement?
 No more boilerplate, save your time on the main features of your project, easy to upgrade, high performance, easy to control.
 
 ## Installation
 Add the package to your **pubspec.yaml**
 ```              
 dependencies:              
-  mlstatemanagement:
+  StateManagement:
     git: 
-        url: https://gitlab.com/maplelabs-android-libs/mlstatemanagement
+        url: https://gitlab.com/maplelabs-android-libs/StateManagement
         ref: [branch-that-matched-with-your-flutter-version]
 ```    
 
 ## Setup 
-### MLStateManagement is a singleton. Before runApp(), you must call setUp() function.
+### StateManagement is a singleton. Before runApp(), you must call setUp() function.
 
 - appDialogBuilder: Customize dialog that shows around your app in a lot of cases
 - appLoadingHUDBuilder: build your own loading widget
@@ -32,7 +32,7 @@ dependencies:
 ```              
 void main() {
   
-  MLStateManagement().setUp(
+  StateManagement().setUp(
     appDialogBuilder: (message) => AppDialog(message: message),
     appLoadingHUDBuilder: (message) => AppLoadingWidget(message: message),
     appOptionalDialogBuilder: (title, message, buttonTitle, altButtonTitle,
@@ -235,17 +235,17 @@ onNewEvent(BaseEvent event) {
       event.isLoading
           ? loadingController.showLoading(
               blurBG: event.hasBlurBackground,
-              msg: MLStateManagement().getMessage(event.message))
+              msg: StateManagement().getMessage(event.message))
           : loadingController.hideLoading();
     }
     if (event is MessageEvent) {
-      showMessage(MLStateManagement().getMessage(event.msg));
+      showMessage(StateManagement().getMessage(event.msg));
     }
     if (event is ErrorEvent) {
       if (kDebugMode) {
         showError(event.error.toString());
       } else {
-        showError(MLStateManagement().getErrorMessage(event.error));
+        showError(StateManagement().getErrorMessage(event.error));
       }
     }
   }
@@ -256,7 +256,7 @@ Future<void> showMessage(String message) {
     return showDialog(
       context: context,
       builder: (context) {
-        return MLStateManagement().appDialogBuilder(message);
+        return StateManagement().appDialogBuilder(message);
       },
     );
   }
@@ -274,7 +274,7 @@ Future<void> showMessage(String message) {
     showDialog(
       context: context,
       builder: (context) {
-        return MLStateManagement().appOptionalDialogBuilder(
+        return StateManagement().appOptionalDialogBuilder(
           title,
           message,
           buttonTitle,
@@ -292,7 +292,7 @@ showError(String message) {
     showDialog(
       context: context,
       builder: (context) {
-        return MLStateManagement().appDialogBuilder(message);
+        return StateManagement().appDialogBuilder(message);
       },
     );
   }

@@ -1,20 +1,17 @@
+import 'package:base_state_management/statemanagement.dart';
 import 'package:example/app/app_page.dart';
 import 'package:example/widgets/dialog_widget.dart';
 import 'package:example/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:mlstatemanagement/mlstatemanagement.dart';
-
 import 'di/injector.dart';
 
 void main() {
   configureDependencies();
-  MLStateManagement().setUp(
+  StateManagement().setUp(
     appDialogBuilder: (message) => AppDialog(message: message),
     appLoadingHUDBuilder: (message) => AppLoadingWidget(message: message),
-    appOptionalDialogBuilder: (title, message, buttonTitle, altButtonTitle,
-            onPressedAltBtn, onPressedBtn) =>
-        AppOptionalDialog(
-            onPressedAltBtn: onPressedAltBtn, onPressedBtn: onPressedBtn),
+    appOptionalDialogBuilder: (title, message, buttonTitle, altButtonTitle, onPressedAltBtn, onPressedBtn) =>
+        AppOptionalDialog(onPressedAltBtn: onPressedAltBtn, onPressedBtn: onPressedBtn),
     appLoadingBuilder: (message) => AppLoadingWidget(message: message),
   );
 
