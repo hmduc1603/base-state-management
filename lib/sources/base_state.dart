@@ -65,6 +65,9 @@ abstract class BaseState<S extends BaseCubitState, C extends BaseCubit<S>, W ext
   }
 
   onNewEvent(BaseEvent event) {
+    if (!mounted) {
+      return;
+    }
     if (event is LoadingEvent) {
       event.isLoading
           ? loadingController.showLoading(blurBG: event.hasBlurBackground, msg: getMessage(event.message))
