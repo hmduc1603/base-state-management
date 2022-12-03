@@ -89,12 +89,18 @@ abstract class BaseState<S extends BaseCubitState, C extends BaseCubit<S>, W ext
     if (error is BaseMessage) {
       return error.localized(context);
     }
+    if (error != null) {
+      return error.toString();
+    }
     return 'Something wrong is happened, please try again';
   }
 
   String getMessage(msg) {
     if (msg is BaseMessage) {
       return msg.localized(context);
+    }
+    if (msg != null) {
+      return msg;
     }
     return '';
   }
