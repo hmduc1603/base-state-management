@@ -2,7 +2,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
-
 import 'base_event.dart';
 import 'base_state.dart';
 
