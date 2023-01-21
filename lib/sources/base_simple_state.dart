@@ -3,7 +3,7 @@ import 'package:base_state_management/statemanagement.dart';
 import 'package:flutter/material.dart';
 import 'base_message.dart';
 
-abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> {
+abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> with AutomaticKeepAliveClientMixin {
   final AppLoadingController appLoadingController = AppLoadingController();
 
   @override
@@ -13,6 +13,7 @@ abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return AppLoadingHUD(child: buildPage(context), controller: appLoadingController);
   }
 
