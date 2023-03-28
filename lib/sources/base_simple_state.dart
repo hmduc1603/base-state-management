@@ -61,8 +61,10 @@ abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> with A
   }
 
   String _getErrorMessage(error) {
-    if (error is BaseMessage) {
-      return error.localized(context);
+    if (error != null) {
+      if (error is BaseMessage) {
+        return error.localized(context);
+      }
     }
     return 'Something wrong is happened, please try again';
   }

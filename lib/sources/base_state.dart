@@ -8,7 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'base_app_loading.dart';
 
-abstract class BaseState<S extends Equatable, C extends BaseCubit<S>, W extends StatefulWidget> extends State<W>
+abstract class BaseState<S extends Equatable, C extends BaseCubit<S>,
+        W extends StatefulWidget> extends State<W>
     with AutomaticKeepAliveClientMixin {
   final C cubit = GetIt.instance<C>();
   final loadingController = AppLoadingController();
@@ -52,7 +53,9 @@ abstract class BaseState<S extends Equatable, C extends BaseCubit<S>, W extends 
           return shouldRebuild(previous, current);
         },
         listener: (context, state) => setState(() => _state = state),
-        child: AppLoadingHUD(controller: loadingController, child: buildByState(context, _state)),
+        child: AppLoadingHUD(
+            controller: loadingController,
+            child: buildByState(context, _state)),
       ),
     );
   }
@@ -71,18 +74,20 @@ abstract class BaseState<S extends Equatable, C extends BaseCubit<S>, W extends 
     }
     if (event is LoadingEvent) {
       event.isLoading
-          ? loadingController.showLoading(blurBG: event.hasBlurBackground, msg: getMessage(event.message))
+          ? loadingController.showLoading(
+              blurBG: event.hasBlurBackground, msg: getMessage(event.message))
           : loadingController.hideLoading();
-    }
-    if (event is MessageEvent) {
+    } else if (event is MessageEvent) {
       showMessage(getMessage(event.msg));
-    }
-    if (event is ErrorEvent) {
-      if (kDebugMode) {
-        showError(event.error.toString());
-      } else {
-        showError(getErrorMessage(event.error));
-      }
+    } else if (event is ErrorEvent) {
+      showError(getErrorMessage(event.error));
+    } else if (event is ShowDialogEvent) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return event.builder(context);
+        },
+      );
     }
   }
 

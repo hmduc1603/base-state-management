@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 abstract class BaseEvent {}
 
 class MessageEvent extends BaseEvent {
@@ -25,5 +27,12 @@ class LoadingEvent extends BaseEvent {
     required this.isLoading,
     this.hasBlurBackground = true,
     this.message,
+  });
+}
+
+class ShowDialogEvent extends BaseEvent {
+  final Widget Function(BuildContext context) builder;
+  ShowDialogEvent({
+    required this.builder,
   });
 }
