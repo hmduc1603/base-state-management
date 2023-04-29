@@ -32,7 +32,9 @@ class LoadingEvent extends BaseEvent {
 
 class ShowDialogEvent extends BaseEvent {
   final Widget Function(BuildContext context) builder;
+  final bool dismissable;
   ShowDialogEvent({
     required this.builder,
+    this.dismissable = false,
   });
 }

@@ -82,6 +82,7 @@ abstract class BaseState<S extends Equatable, C extends BaseCubit<S>,
       showError(getErrorMessage(event.error));
     } else if (event is ShowDialogEvent) {
       showDialog(
+        barrierDismissible: event.dismissable,
         context: context,
         builder: (context) {
           return event.builder(context);
