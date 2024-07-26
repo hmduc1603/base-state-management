@@ -3,7 +3,8 @@ import 'package:base_state_management/statemanagement.dart';
 import 'package:flutter/material.dart';
 import 'base_message.dart';
 
-abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> with AutomaticKeepAliveClientMixin {
+abstract class BaseSimpleState<P extends StatefulWidget> extends State<P>
+    with AutomaticKeepAliveClientMixin {
   final AppLoadingController appLoadingController = AppLoadingController();
 
   @override
@@ -14,7 +15,8 @@ abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> with A
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return AppLoadingHUD(child: buildPage(context), controller: appLoadingController);
+    return AppLoadingHUD(
+        child: buildPage(context), controller: appLoadingController);
   }
 
   Widget buildPage(BuildContext context);
@@ -33,6 +35,7 @@ abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> with A
     String? message,
     String? buttonTitle,
     String? altButtonTitle,
+    Widget? decorationWidget,
     required VoidCallback onPressedAltBtn,
     required VoidCallback onPressedBtn,
   }) {
@@ -44,6 +47,7 @@ abstract class BaseSimpleState<P extends StatefulWidget> extends State<P> with A
           message,
           buttonTitle,
           altButtonTitle,
+          decorationWidget,
           onPressedAltBtn,
           onPressedBtn,
         );

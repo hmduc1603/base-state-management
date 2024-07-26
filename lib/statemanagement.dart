@@ -19,6 +19,7 @@ class StateManagement {
     String? message,
     String? buttonTitle,
     String? altButtonTitle,
+    Widget? decorationWidget,
     VoidCallback onPressedAltBtn,
     VoidCallback onPressedBtn,
   ) appOptionalDialogBuilder;
@@ -33,10 +34,10 @@ class StateManagement {
       String? message,
       String? buttonTitle,
       String? altButtonTitle,
+      Widget? decorationWidget,
       VoidCallback onPressedAltBtn,
       VoidCallback onPressedBtn,
-    )
-        appOptionalDialogBuilder,
+    ) appOptionalDialogBuilder,
     required Widget Function(String message) appLoadingBuilder,
   }) {
     _singleton.appDialogBuilder = appDialogBuilder;

@@ -13,11 +13,15 @@ abstract class BaseCubit<T extends Equatable> extends Cubit<T> {
   BaseCubit(T initialState) : super(initialState);
 
   showLoading({bool hasBlurBackground = true, dynamic message}) {
-    _addToEvent(LoadingEvent(isLoading: true, hasBlurBackground: hasBlurBackground, message: message));
+    _addToEvent(LoadingEvent(
+        isLoading: true,
+        hasBlurBackground: hasBlurBackground,
+        message: message));
   }
 
   hideLoading({bool hasBlurBackground = true}) {
-    _addToEvent(LoadingEvent(isLoading: false, hasBlurBackground: hasBlurBackground));
+    _addToEvent(
+        LoadingEvent(isLoading: false, hasBlurBackground: hasBlurBackground));
   }
 
   showMessage(dynamic msg) {
@@ -38,6 +42,13 @@ abstract class BaseCubit<T extends Equatable> extends Cubit<T> {
   Future<void> close() {
     eventSubject.close();
     return super.close();
+  }
+
+  @override
+  void emit(T state) {
+    if (!isClosed) {
+      super.emit(state);
+    }
   }
 }
 
